@@ -82,27 +82,29 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
+# Example aliases
+alias zshconfig="mate ~/.zshrc"
+alias ohmyzsh="mate ~/.oh-my-zsh"
 alias b="bundle exec"
 alias br="bundle exec rake"
+alias gu="git up"
 alias j="jake watch:dev"
-alias up="~/.rbenv/versions/2.3.1/bin/git-up"
+alias up="~/.rbenv/versions/2.1.2/bin/git-up"
 alias upa="up; atom ./"
 alias gcb="git checkout -b"
 alias gcm="git commit -m"
 alias gs="git show --stat --oneline origin/master..HEAD"
-alias g++cv="g++ \$(pkg-config --cflags --libs opencv)"
-alias gcmu="git checkout master; up"
-alias jup='docker run -d -p 8888:8888 --name jupyter -v "/Users/trunkclub/Development/notebooks" jupyter/notebook'
 alias current_branch="git rev-parse --abbrev-ref HEAD | tr -d '[[:space:]]'"
+alias gcmu="git checkout master; up"
 
 precmd() {
   echo -ne "\e]1;${PWD##*/}\a"
 }
 
 gpo() {
-  BRANCH=$(current_branch)
-  git push origin $1 $BRANCH 
-  echo -e "http://github.com/trunkclub/${PWD##*/}/compare/${BRANCH}?expand=1"
+  BRANCH=$(git rev-parse --abbrev-ref HEAD | tr -d '[[:space:]]')
+  git push origin $1 $BRANCH
+  echo -e "http://github.com/chiengineer/${PWD##*/}/compare/${BRANCH}?expand=1"
 }
 
 kgcmu() {
@@ -117,8 +119,6 @@ iterm2_print_user_vars() {
     iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
 }
 
-export NVM_DIR="/Users/trunkclub/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 eval $(ssh-add ~/.ssh/github_rsa)
 
 . $HOME/.asdf/asdf.sh
