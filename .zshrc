@@ -85,7 +85,7 @@ source $ZSH/oh-my-zsh.sh
 alias b="bundle exec"
 alias br="bundle exec rake"
 alias j="jake watch:dev"
-alias up="git up"
+alias up="~/.rbenv/versions/2.1.2/bin/git-up"
 alias upa="up; atom ./"
 alias gcb="git checkout -b"
 alias gcm="git commit -m"
@@ -93,15 +93,22 @@ alias gs="git show --stat --oneline origin/master..HEAD"
 alias g++cv="g++ \$(pkg-config --cflags --libs opencv)"
 alias gcmu="git checkout master; up"
 alias jup='docker run -d -p 8888:8888 --name jupyter -v "/Users/trunkclub/Development/notebooks" jupyter/notebook'
+alias current_branch="git rev-parse --abbrev-ref HEAD | tr -d '[[:space:]]'"
 
 precmd() {
   echo -ne "\e]1;${PWD##*/}\a"
 }
 
 gpo() {
-  BRANCH=$(git rev-parse --abbrev-ref HEAD | tr -d '[[:space:]]')
+  BRANCH=$(current_branch)
   git push origin $1 $BRANCH 
   echo -e "http://github.com/trunkclub/${PWD##*/}/compare/${BRANCH}?expand=1"
+}
+
+kgcmu() {
+  BRANCH=$(current_branch)
+  gcmu
+  git branch -D $BRANCH
 }
 
 source /Users/trunkclub/.iterm2_shell_integration.zsh
