@@ -51,7 +51,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby mix)
+plugins=(git ruby mix ssh-agent)
 
 # User configuration
 
@@ -85,7 +85,7 @@ source $ZSH/oh-my-zsh.sh
 alias b="bundle exec"
 alias br="bundle exec rake"
 alias j="jake watch:dev"
-alias up="~/.rbenv/versions/2.1.2/bin/git-up"
+alias up="~/.rbenv/versions/2.3.1/bin/git-up"
 alias upa="up; atom ./"
 alias gcb="git checkout -b"
 alias gcm="git commit -m"
@@ -119,3 +119,8 @@ iterm2_print_user_vars() {
 
 export NVM_DIR="/Users/trunkclub/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+eval $(ssh-add ~/.ssh/github_rsa)
+
+. $HOME/.asdf/asdf.sh
+
+. $HOME/.asdf/completions/asdf.bash
