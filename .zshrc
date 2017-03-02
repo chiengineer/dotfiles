@@ -89,7 +89,7 @@ alias b="bundle exec"
 alias br="bundle exec rake"
 alias gu="git up"
 alias j="jake watch:dev"
-alias up="~/.rbenv/versions/2.1.2/bin/git-up"
+alias up="~/.rbenv/versions/2.3.0/bin/git-up"
 alias upa="up; atom ./"
 alias gcb="git checkout -b"
 alias gcm="git commit -m"
@@ -113,13 +113,9 @@ kgcmu() {
   git branch -D $BRANCH
 }
 
-source /Users/trunkclub/.iterm2_shell_integration.zsh
-
 iterm2_print_user_vars() {
     iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
 }
-
-eval $(ssh-add ~/.ssh/github_rsa)
 
 . $HOME/.asdf/asdf.sh
 
