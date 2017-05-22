@@ -97,6 +97,11 @@ alias gs="git show --stat --oneline origin/master..HEAD"
 alias current_branch="git rev-parse --abbrev-ref HEAD | tr -d '[[:space:]]'"
 alias gcmu="git checkout master; up"
 
+rebase() {
+  COMMITS=$(git shortlog -s -n origin/master..HEAD | tr -dc '0-9')
+  git rebase HEAD~$COMMITS -i
+}
+
 precmd() {
   echo -ne "\e]1;${PWD##*/}\a"
 }
@@ -109,8 +114,9 @@ gpo() {
 
 kgcmu() {
   BRANCH=$(current_branch)
-  gcmu
+  git checkout master
   git branch -D $BRANCH
+  up
 }
 
 iterm2_print_user_vars() {
